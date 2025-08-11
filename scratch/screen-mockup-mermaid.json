@@ -1,0 +1,125 @@
+{
+  "screen": "RealBotArmy Dashboard",
+  "header": {
+    "env": "development",
+    "port": 3000,
+    "logLevel": "info",
+    "agentManager": {
+      "status": "running",
+      "actions": ["start", "stop"],
+      "health": "ok"
+    }
+  },
+  "sidebar": ["Dashboard", "Agents", "Tasks", "Logs", "Settings"],
+  "main": {
+    "statusCards": [
+      {
+        "title": "System Status",
+        "details": {
+          "node": ">=18",
+          "language": "TypeScript",
+          "testing": "Jest",
+          "rateLimit": "on"
+        }
+      },
+      {
+        "title": "Agent Manager",
+        "details": {
+          "initialized": true,
+          "agentsActive": 2,
+          "maxAgents": 10,
+          "healthCheckIntervalMs": 10000,
+          "maxRetries": 3
+        }
+      },
+      {
+        "title": "Task Queue",
+        "details": {
+          "size": 3,
+          "processIntervalMs": 1000,
+          "priorityLevels": 10
+        }
+      }
+    ],
+    "agents": {
+      "columns": [
+        { "key": "name", "label": "Name" },
+        { "key": "type", "label": "Type" },
+        { "key": "status", "label": "Status" },
+        { "key": "tasksCompleted", "label": "Tasks Completed" },
+        { "key": "uptime", "label": "Uptime" },
+        { "key": "actions", "label": "Actions" }
+      ],
+      "rows": [
+        {
+          "name": "worker-1",
+          "type": "WORKER",
+          "status": "running",
+          "tasksCompleted": 12,
+          "uptime": "00:05:21",
+          "actions": ["stop", "details"]
+        },
+        {
+          "name": "worker-2",
+          "type": "WORKER",
+          "status": "running",
+          "tasksCompleted": 9,
+          "uptime": "00:03:10",
+          "actions": ["stop", "details"]
+        }
+      ]
+    },
+    "tasks": {
+      "submitForm": {
+        "fields": [
+          {
+            "key": "type",
+            "label": "Type",
+            "type": "select",
+            "options": ["process", "calculate", "transform"],
+            "required": true
+          },
+          {
+            "key": "priority",
+            "label": "Priority",
+            "type": "number",
+            "min": 1,
+            "max": 10,
+            "required": true
+          },
+          {
+            "key": "payload",
+            "label": "Payload (JSON)",
+            "type": "json",
+            "placeholder": "{ \"data\": \"...\" }",
+            "required": true
+          }
+        ],
+        "actions": ["validate", "submit"]
+      },
+      "recent": [
+        {
+          "id": "ab12",
+          "type": "process",
+          "status": "completed",
+          "agent": "worker-1",
+          "durationMs": 320
+        },
+        {
+          "id": "cd34",
+          "type": "calculate",
+          "status": "completed",
+          "agent": "worker-2",
+          "durationMs": 145
+        },
+        {
+          "id": "ef56",
+          "type": "transform",
+          "status": "queued",
+          "agent": null,
+          "durationMs": null
+        }
+      ]
+    }
+  }
+}

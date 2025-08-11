@@ -25,6 +25,10 @@ git remote add origin https://github.com/Geniusboywonder/RealBotArmy.git
 echo "✅ Remote configured as:"
 git remote -v
 
+# Fetch remote information first
+echo "🔍 Fetching remote repository information..."
+git fetch origin 2>/dev/null || echo "Remote might be empty or unreachable"
+
 # Create and switch to main branch
 git checkout -b main 2>/dev/null || git checkout main
 
@@ -35,6 +39,10 @@ git add .
 # Check if there are changes to commit
 if git diff --staged --quiet; then
     echo "⚠️ No changes to commit"
+    if git ls-remote --exit-code --heads origin main >/dev/null 2>&1; then
+        echo "📥 Pulling latest changes from remote..."
+        git pull origin main --allow-unrelated-histories
+    fi
     exit 0
 fi
 
@@ -43,7 +51,7 @@ echo "💾 Creating initial commit..."
 git commit -m "feat: initial project setup with complete infrastructure
 
 - Add TypeScript configuration with strict typing
-- Add ESLint and Prettier for code quality
+- Add ESLint and Prettier for code quality  
 - Add Jest testing framework with coverage
 - Add GitHub Actions CI/CD pipeline
 - Add comprehensive agent architecture
@@ -57,26 +65,90 @@ git commit -m "feat: initial project setup with complete infrastructure
 - Add issue and PR templates
 - Setup development environment with Husky hooks"
 
-# Push to main branch
-echo "🚀 Pushing to main branch..."
-git push -u origin main
+# Check if remote main branch exists
+echo "🔍 Checking remote repository status..."
+if git ls-remote --exit-code --heads origin main >/dev/null 2>&1; then
+    echo "⚠️  Remote main branch exists. Attempting to merge..."
+    
+    # Try to pull and merge with allow-unrelated-histories
+    if git pull origin main --allow-unrelated-histories --no-edit; then
+        echo "✅ Successfully merged with remote main"
+    else
+        echo "❌ Merge conflict detected. Forcing push with --force-with-lease for safety..."
+        echo "⚠️  This will overwrite remote content. Continue? (y/N)"
+        read -r confirm
+        if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
+            git push --force-with-lease origin main
+        else
+            echo "❌ Aborted. Please resolve conflicts manually."
+            exit 1
+        fi
+    fi
+    
+    # Push main branch
+    echo "🚀 Pushing to main branch..."
+    git push origin main
+else
+    echo "✨ Remote main branch doesn't exist, creating fresh setup..."
+    
+    # Push to main branch
+    echo "🚀 Pushing to main branch..."
+    git push -u origin main
+fi
 
-# Create and push develop branch
-echo "🌿 Creating develop branch..."
-git checkout -b develop
-git push -u origin develop
+# Handle develop branch
+echo "🌿 Setting up develop branch..."
+if git ls-remote --exit-code --heads origin develop >/dev/null 2>&1; then
+    echo "📥 Remote develop branch exists..."
+    
+    # Check if we have a local develop branch
+    if git show-ref --verify --quiet refs/heads/develop; then
+        # Switch to existing local develop
+        git checkout develop
+        
+        # Try to pull remote develop
+        if git pull origin develop --allow-unrelated-histories --no-edit; then
+            echo "✅ Successfully synced with remote develop"
+        else
+            echo "❌ Conflict with remote develop. Forcing push..."
+            echo "⚠️  This will overwrite remote develop. Continue? (y/N)"
+            read -r confirm
+            if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
+                git push --force-with-lease origin develop
+            else
+                echo "❌ Skipping develop branch update."
+            fi
+        fi
+    else
+        # Create local develop from remote
+        git checkout -b develop origin/develop
+        
+        # Merge main into develop
+        git merge main --allow-unrelated-histories --no-edit
+    fi
+    
+    # Push develop
+    git push origin develop
+else
+    echo "✨ Creating new develop branch..."
+    git checkout -b develop
+    git push -u origin develop
+fi
 
 # Switch back to main
 git checkout main
 
 echo ""
-echo "✅ Repository successfully initialized and pushed to GitHub!"
+echo "✅ Repository successfully synchronized with GitHub!"
 echo ""
 echo "🔗 Repository URL: https://github.com/Geniusboywonder/RealBotArmy"
 echo ""
-echo "Next steps:"
-echo "1. Go to GitHub and verify the repository was created correctly"
-echo "2. Set up branch protection rules for main branch (if not done already)"
+echo "📊 Current status:"
+git branch -a
+echo ""
+echo "🎯 Next steps:"
+echo "1. Go to GitHub and verify the repository content"
+echo "2. Set up branch protection rules for main branch (if needed)"
 echo "3. Configure any required secrets for GitHub Actions"
 echo "4. Review and update README.md if needed"
 echo ""

@@ -1,0 +1,13 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+websockets==11.0.3
+pydantic==2.4.2
+python-multipart==0.0.6
+aiofiles==23.2.1
+python-dotenv==1.0.0
+langchain==0.0.327
+openai==0.28.1
+anthropic==0.3.11
+httpx==0.25.0
+pytest==7.4.3
+pytest-asyncio==0.21.1
