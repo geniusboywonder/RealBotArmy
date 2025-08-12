@@ -22,6 +22,9 @@ module.exports = {
     '*.js'
   ],
   rules: {
-    // Add custom rules here
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
+    ],
   },
 };

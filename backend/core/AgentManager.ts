@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
-import { IAgent, AgentType, AgentStatus, Task, TaskResult, AgentEvent, AgentManagerEvent } from '@/types';
+import { IAgent, AgentType, AgentStatus, Task, TaskResult as _TaskResult, AgentEvent, AgentManagerEvent } from '@/types';
 import { logger } from '@/utils/logger';
-import { generateId } from '@/utils/helpers';
+import { generateId as _generateId } from '@/utils/helpers';
 import { config } from '@/config';
 
 export class AgentManager extends EventEmitter {
