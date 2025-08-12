@@ -18,11 +18,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Debug - List files after checkout
+        run: |
+          echo "Listing files in workspace after checkout:"
+          ls -alh
+          echo "Recursive file tree:"
+          find . -type f
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+
+      - name: Debug - List files before npm ci
+        run: |
+          echo "Listing files before npm ci:"
+          ls -alh
+          find . -name 'package-lock.json'
 
       - name: Install dependencies
         run: npm ci
@@ -54,11 +67,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Debug - List files after checkout
+        run: |
+          echo "Listing files in workspace after checkout:"
+          ls -alh
+          echo "Recursive file tree:"
+          find . -type f
+
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
           cache: 'npm'
+
+      - name: Debug - List files before npm ci
+        run: |
+          echo "Listing files before npm ci:"
+          ls -alh
+          find . -name 'package-lock.json'
 
       - name: Install dependencies
         run: npm ci
