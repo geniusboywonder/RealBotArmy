@@ -11,11 +11,9 @@ const Header: React.FC = () => {
             <span className="text-sm text-gray-600">Connected</span>
           </div>
         </div>
-        
+
         <div className="flex items-center space-x-4">
-          <button className="btn-secondary">
-            View Spec
-          </button>
+          <button className="btn-secondary">View Spec</button>
           <div className="flex items-center space-x-2 text-sm text-gray-600">
             <span>Project:</span>
             <span className="font-medium">Default POC</span>

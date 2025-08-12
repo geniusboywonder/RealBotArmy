@@ -30,22 +30,22 @@ export async function retry<T>(
   baseDelay: number = 1000
 ): Promise<T> {
   let lastError: Error;
-  
+
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
       return await fn();
     } catch (error) {
       lastError = error as Error;
-      
+
       if (attempt === maxAttempts) {
         throw lastError;
       }
-      
+
       const delay = baseDelay * Math.pow(2, attempt - 1);
       await sleep(delay);
     }
   }
-  
+
   throw lastError!;
 }
 
@@ -56,7 +56,10 @@ export function timeout<T>(promise: Promise<T>, ms: number): Promise<T> {
   return Promise.race([
     promise,
     new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error(`Operation timed out after ${ms}ms`)), ms)
+      setTimeout(
+        () => reject(new Error(`Operation timed out after ${ms}ms`)),
+        ms
+      )
     ),
   ]);
 }
@@ -75,19 +78,19 @@ export function isEmpty(value: unknown): boolean {
   if (value === null || value === undefined) {
     return true;
   }
-  
+
   if (typeof value === 'string') {
     return value.trim().length === 0;
   }
-  
+
   if (Array.isArray(value)) {
     return value.length === 0;
   }
-  
+
   if (typeof value === 'object') {
     return Object.keys(value).length === 0;
   }
-  
+
   return false;
 }
 
@@ -96,13 +99,13 @@ export function isEmpty(value: unknown): boolean {
  */
 export function formatBytes(bytes: number, decimals: number = 2): string {
   if (bytes === 0) return '0 Bytes';
-  
+
   const k = 1024;
   const dm = decimals < 0 ? 0 : decimals;
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-  
+
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  
+
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
@@ -114,7 +117,7 @@ export function formatDuration(ms: number): string {
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
-  
+
   if (days > 0) {
     return `${days}d ${hours % 24}h ${minutes % 60}m ${seconds % 60}s`;
   }

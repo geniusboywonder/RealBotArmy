@@ -5,20 +5,19 @@ import { AgentManager } from '@/core/AgentManager';
 async function main() {
   try {
     logger.info('🤖 Starting RealBotArmy...');
-    
+
     // Initialize configuration
     await config.initialize();
     logger.info('✅ Configuration loaded');
-    
+
     // Initialize Agent Manager
     const agentManager = new AgentManager();
     await agentManager.initialize();
     logger.info('✅ Agent Manager initialized');
-    
+
     // Start the application
     await agentManager.start();
     logger.info('🚀 RealBotArmy is running!');
-    
   } catch (error) {
     logger.error('❌ Failed to start RealBotArmy:', error);
     process.exit(1);

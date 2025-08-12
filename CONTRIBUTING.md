@@ -23,6 +23,7 @@ We love your input! We want to make contributing to RealBotArmy as easy and tran
 ## 📋 Pull Request Process
 
 ### Before Submitting
+
 - [ ] Code follows project style guidelines
 - [ ] Self-review completed
 - [ ] Tests added/updated for new features
@@ -30,6 +31,7 @@ We love your input! We want to make contributing to RealBotArmy as easy and tran
 - [ ] No merge conflicts
 
 ### PR Requirements
+
 - **Clear title** describing the change
 - **Detailed description** of what and why
 - **Link to related issues** if applicable
@@ -60,6 +62,7 @@ npm run type-check
 - Write **meaningful commit messages**
 
 ### Commit Message Format
+
 ```
 type(scope): description
 
@@ -69,6 +72,7 @@ type(scope): description
 ```
 
 **Types:**
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -80,6 +84,7 @@ type(scope): description
 ## 🐛 Bug Reports
 
 When filing an issue, please include:
+
 - **Clear title** and description
 - **Steps to reproduce**
 - **Expected vs actual behavior**
@@ -89,6 +94,7 @@ When filing an issue, please include:
 ## 💡 Feature Requests
 
 For new features:
+
 - **Describe the problem** you're trying to solve
 - **Propose a solution**
 - **Consider alternatives**

@@ -5,13 +5,14 @@
 I've reorganized the project structure to avoid GitHub conflicts:
 
 ### Current Structure:
+
 ```
 📁 AI Code/                          # Your main working directory (points to BotArmy repo)
 ├── 📁 Projects/                     # New subfolder for separate projects
 │   └── 📁 RealBotArmy/             # Our new project (will point to RealBotArmy repo)
 │       ├── backend/, tests/, docs/, etc.
 │       └── scripts/init-git.sh      # Updated git initialization
-├── 📁 Bot Army/                     # For the existing BotArmy content  
+├── 📁 Bot Army/                     # For the existing BotArmy content
 ├── Other BotArmy files...           # Your existing BotArmy project files
 └── .git/                           # Points to the existing BotArmy repository
 ```
@@ -19,17 +20,20 @@ I've reorganized the project structure to avoid GitHub conflicts:
 ## 🚀 Step-by-Step Setup Process
 
 ### 1. Navigate to the RealBotArmy Project
+
 ```bash
 cd "/Users/neill/Documents/AI Code/Projects/RealBotArmy"
 ```
 
 ### 2. Make Scripts Executable
+
 ```bash
 chmod +x scripts/*.sh
 chmod +x .husky/pre-commit
 ```
 
 ### 3. Verify Project Structure
+
 ```bash
 pwd
 # Should show: /Users/neill/Documents/AI Code/Projects/RealBotArmy
@@ -39,11 +43,13 @@ ls -la
 ```
 
 ### 4. Initialize and Push to GitHub
+
 ```bash
 ./scripts/init-git.sh
 ```
 
 This script will:
+
 - ✅ Initialize a fresh git repository in the RealBotArmy folder
 - ✅ Remove any conflicting remotes
 - ✅ Set the correct remote: https://github.com/Geniusboywonder/RealBotArmy.git
@@ -51,6 +57,7 @@ This script will:
 - ✅ Push all code to your RealBotArmy repository
 
 ### 5. Test the Setup
+
 ```bash
 # Install dependencies
 npm install
@@ -68,21 +75,27 @@ npm run dev
 ## 🔍 Verification Steps
 
 ### Check Git Remote Configuration:
+
 ```bash
 cd "/Users/neill/Documents/AI Code/Projects/RealBotArmy"
 git remote -v
 ```
+
 Should show:
+
 ```
 origin  https://github.com/Geniusboywonder/RealBotArmy.git (fetch)
 origin  https://github.com/Geniusboywonder/RealBotArmy.git (push)
 ```
 
 ### Check Branch Configuration:
+
 ```bash
 git branch -a
 ```
+
 Should show:
+
 ```
 * main
   develop
@@ -111,6 +124,7 @@ Should show:
 If you encounter any issues:
 
 ### Issue: "Remote origin already exists"
+
 ```bash
 cd "/Users/neill/Documents/AI Code/Projects/RealBotArmy"
 git remote remove origin
@@ -118,6 +132,7 @@ git remote add origin https://github.com/Geniusboywonder/RealBotArmy.git
 ```
 
 ### Issue: "Not a git repository"
+
 ```bash
 cd "/Users/neill/Documents/AI Code/Projects/RealBotArmy"
 git init
@@ -125,6 +140,7 @@ git remote add origin https://github.com/Geniusboywonder/RealBotArmy.git
 ```
 
 ### Issue: Permission denied
+
 ```bash
 chmod +x scripts/init-git.sh
 chmod +x .husky/pre-commit

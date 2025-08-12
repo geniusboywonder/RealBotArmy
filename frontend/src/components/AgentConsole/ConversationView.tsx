@@ -56,17 +56,19 @@ const ConversationView: React.FC<ConversationViewProps> = ({ agentId }) => {
     <div className="h-full flex flex-col">
       <div className="flex-1 overflow-y-auto space-y-4 p-4">
         {agentMessages.length > 0 ? (
-          agentMessages.map((message) => (
+          agentMessages.map(message => (
             <MessageItem key={message.id} message={message} />
           ))
         ) : (
           <div className="text-center text-gray-500 py-8">
             <p>No messages yet for {agentId}</p>
-            <p className="text-sm mt-2">Agent conversations will appear here in real-time</p>
+            <p className="text-sm mt-2">
+              Agent conversations will appear here in real-time
+            </p>
           </div>
         )}
       </div>
-      
+
       {/* Message input area */}
       <div className="border-t border-gray-200 p-4">
         <div className="flex space-x-2">
@@ -75,9 +77,7 @@ const ConversationView: React.FC<ConversationViewProps> = ({ agentId }) => {
             placeholder={`Send message to ${agentId}...`}
             className="flex-1 input-field"
           />
-          <button className="btn-primary">
-            Send
-          </button>
+          <button className="btn-primary">Send</button>
         </div>
       </div>
     </div>

@@ -18,7 +18,9 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
   };
 
   return (
-    <div className={`p-4 rounded-lg border ${messageTypeStyles[message.message_type] || 'bg-gray-50 border-gray-200'}`}>
+    <div
+      className={`p-4 rounded-lg border ${messageTypeStyles[message.message_type] || 'bg-gray-50 border-gray-200'}`}
+    >
       <div className="flex items-start justify-between mb-2">
         <div className="flex items-center space-x-2">
           <span className="font-medium text-sm text-gray-900">
@@ -43,11 +45,9 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
           <span>{formatTimestamp(message.timestamp)}</span>
         </div>
       </div>
-      
-      <div className="text-gray-800 mb-3">
-        {message.content.text}
-      </div>
-      
+
+      <div className="text-gray-800 mb-3">{message.content.text}</div>
+
       {Object.keys(message.content.metadata).length > 0 && (
         <div className="bg-white p-2 rounded text-xs">
           <div className="font-medium text-gray-700 mb-1">Metadata:</div>

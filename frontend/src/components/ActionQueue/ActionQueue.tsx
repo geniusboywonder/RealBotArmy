@@ -15,8 +15,16 @@ const mockActions: HumanAction[] = [
     title: 'Technology Stack Decision',
     description: 'Conflict between Analyst and Architect on database choice',
     options: [
-      { id: 'opt_1', label: 'PostgreSQL', description: 'Robust relational database' },
-      { id: 'opt_2', label: 'MongoDB', description: 'Flexible document database' },
+      {
+        id: 'opt_1',
+        label: 'PostgreSQL',
+        description: 'Robust relational database',
+      },
+      {
+        id: 'opt_2',
+        label: 'MongoDB',
+        description: 'Flexible document database',
+      },
     ],
     context: {
       analyst_preference: 'PostgreSQL',
@@ -74,14 +82,15 @@ const ActionQueue: React.FC<ActionQueueProps> = ({ isOpen, onToggle }) => {
           </button>
         </div>
         <p className="text-sm text-gray-600 mt-1">
-          {mockActions.length} pending decision{mockActions.length !== 1 ? 's' : ''}
+          {mockActions.length} pending decision
+          {mockActions.length !== 1 ? 's' : ''}
         </p>
       </div>
-      
+
       {/* Actions List */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {mockActions.length > 0 ? (
-          mockActions.map((action) => (
+          mockActions.map(action => (
             <ActionItem key={action.id} action={action} />
           ))
         ) : (

@@ -6,25 +6,16 @@ module.exports = {
     project: './tsconfig.json',
   },
   plugins: ['@typescript-eslint'],
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended'
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   env: {
     node: true,
     es6: true,
   },
-  ignorePatterns: [
-    'dist/',
-    'logs/',
-    'node_modules/',
-    'scratch/',
-    '*.js'
-  ],
+  ignorePatterns: ['dist/', 'logs/', 'node_modules/', 'scratch/', '*.js'],
   rules: {
     '@typescript-eslint/no-unused-vars': [
       'error',
-      { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
+      { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
     ],
   },
 };

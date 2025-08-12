@@ -13,7 +13,7 @@ RealBotArmy is designed to create, manage, and coordinate multiple AI agents wor
 ## ✨ Features
 
 - **🔧 Modular Agent Architecture** - Easy to extend and customize
-- **⚡ High Performance** - Efficient task processing and resource management  
+- **⚡ High Performance** - Efficient task processing and resource management
 - **🛡️ Type Safety** - Full TypeScript support with strict typing
 - **📊 Monitoring & Health Checks** - Built-in agent monitoring and reporting
 - **🔄 Task Queue Management** - Priority-based task scheduling
@@ -24,6 +24,7 @@ RealBotArmy is designed to create, manage, and coordinate multiple AI agents wor
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js (v18 or higher)
 - npm or yarn
 - Git
@@ -68,7 +69,7 @@ manager.submitTask({
   id: 'task-1',
   type: 'process',
   payload: { data: 'Hello World' },
-  priority: 5
+  priority: 5,
 });
 ```
 
@@ -135,12 +136,15 @@ DEFAULT_TIMEOUT=30000
 ## 🤖 Agent Types
 
 ### WorkerAgent
+
 Basic agent for general task processing:
+
 - Process tasks
-- Calculate operations  
+- Calculate operations
 - Transform data
 
 ### Custom Agents
+
 Extend `BaseAgent` to create specialized agents:
 
 ```typescript
@@ -149,7 +153,7 @@ import { BaseAgent, AgentType, Task } from 'realbotarmy';
 class CustomAgent extends BaseAgent {
   constructor(name: string) {
     super(name, AgentType.SPECIALIST, {
-      capabilities: ['custom', 'specialized']
+      capabilities: ['custom', 'specialized'],
     });
   }
 
@@ -163,6 +167,7 @@ class CustomAgent extends BaseAgent {
 ## 📊 Monitoring
 
 ### Health Checks
+
 All agents provide health status:
 
 ```typescript
@@ -171,19 +176,20 @@ console.log({
   status: health.status,
   uptime: health.uptime,
   tasksCompleted: health.tasksCompleted,
-  memoryUsage: health.memoryUsage
+  memoryUsage: health.memoryUsage,
 });
 ```
 
 ### Events
+
 Listen to agent manager events:
 
 ```typescript
-manager.on('task:completed', (event) => {
+manager.on('task:completed', event => {
   console.log(`Task ${event.data.taskId} completed`);
 });
 
-manager.on('agent:error', (event) => {
+manager.on('agent:error', event => {
   console.error(`Agent ${event.agentId} error:`, event.data);
 });
 ```
@@ -191,7 +197,7 @@ manager.on('agent:error', (event) => {
 ## 🔒 Security
 
 - **Branch Protection** - Main branch requires PR approval
-- **Input Validation** - All inputs validated with Zod schemas  
+- **Input Validation** - All inputs validated with Zod schemas
 - **Type Safety** - Full TypeScript coverage
 - **Dependency Scanning** - Automated security checks
 - **Rate Limiting** - Built-in rate limiting support

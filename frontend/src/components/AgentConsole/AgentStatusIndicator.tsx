@@ -5,7 +5,9 @@ interface AgentStatusIndicatorProps {
   agent: Agent;
 }
 
-const AgentStatusIndicator: React.FC<AgentStatusIndicatorProps> = ({ agent }) => {
+const AgentStatusIndicator: React.FC<AgentStatusIndicatorProps> = ({
+  agent,
+}) => {
   const statusConfig = {
     idle: { color: 'gray', icon: '⚪', label: 'Idle' },
     thinking: { color: 'yellow', icon: '🟡', label: 'Processing' },

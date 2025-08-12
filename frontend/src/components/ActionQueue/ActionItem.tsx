@@ -25,7 +25,9 @@ const ActionItem: React.FC<ActionItemProps> = ({ action }) => {
 
   return (
     <>
-      <div className={`p-4 rounded-lg border cursor-pointer hover:shadow-md transition-shadow ${priorityStyles[action.priority]}`}>
+      <div
+        className={`p-4 rounded-lg border cursor-pointer hover:shadow-md transition-shadow ${priorityStyles[action.priority]}`}
+      >
         <div className="flex items-start justify-between mb-2">
           <div className="flex items-center space-x-2">
             <span className="text-lg">{priorityIcons[action.priority]}</span>
@@ -39,15 +41,16 @@ const ActionItem: React.FC<ActionItemProps> = ({ action }) => {
             </span>
           )}
         </div>
-        
+
         <h4 className="font-medium text-sm mb-2">{action.title}</h4>
         <p className="text-xs text-gray-700 mb-3 line-clamp-2">
           {action.description}
         </p>
-        
+
         <div className="flex items-center justify-between">
           <span className="text-xs text-gray-600">
-            {action.options.length} option{action.options.length !== 1 ? 's' : ''}
+            {action.options.length} option
+            {action.options.length !== 1 ? 's' : ''}
           </span>
           <button
             onClick={() => setIsModalOpen(true)}
@@ -57,12 +60,12 @@ const ActionItem: React.FC<ActionItemProps> = ({ action }) => {
           </button>
         </div>
       </div>
-      
+
       <ActionModal
         action={action}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onDecision={(optionId) => {
+        onDecision={optionId => {
           console.log('Decision made:', optionId);
           setIsModalOpen(false);
         }}

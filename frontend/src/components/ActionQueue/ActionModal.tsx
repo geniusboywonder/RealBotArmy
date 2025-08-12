@@ -42,7 +42,7 @@ const ActionModal: React.FC<ActionModalProps> = ({
           </div>
           <p className="text-gray-600 mt-2">{action.description}</p>
         </div>
-        
+
         {/* Context Information */}
         <div className="p-6 border-b border-gray-200">
           <h3 className="font-medium text-gray-900 mb-3">Context</h3>
@@ -52,12 +52,12 @@ const ActionModal: React.FC<ActionModalProps> = ({
             </pre>
           </div>
         </div>
-        
+
         {/* Options */}
         <div className="p-6">
           <h3 className="font-medium text-gray-900 mb-4">Choose an option:</h3>
           <div className="space-y-3">
-            {action.options.map((option) => (
+            {action.options.map(option => (
               <label
                 key={option.id}
                 className="flex items-start space-x-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"
@@ -67,11 +67,13 @@ const ActionModal: React.FC<ActionModalProps> = ({
                   name="decision"
                   value={option.id}
                   checked={selectedOption === option.id}
-                  onChange={(e) => setSelectedOption(e.target.value)}
+                  onChange={e => setSelectedOption(e.target.value)}
                   className="mt-1"
                 />
                 <div className="flex-1">
-                  <div className="font-medium text-gray-900">{option.label}</div>
+                  <div className="font-medium text-gray-900">
+                    {option.label}
+                  </div>
                   {option.description && (
                     <div className="text-sm text-gray-600 mt-1">
                       {option.description}
@@ -82,7 +84,7 @@ const ActionModal: React.FC<ActionModalProps> = ({
             ))}
           </div>
         </div>
-        
+
         {/* Footer */}
         <div className="p-6 border-t border-gray-200 flex justify-end space-x-3">
           <button onClick={onClose} className="btn-secondary">

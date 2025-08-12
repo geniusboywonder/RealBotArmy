@@ -1,5 +1,13 @@
 import { EventEmitter } from 'events';
-import { IAgent, AgentType, AgentStatus, Task, TaskResult as _TaskResult, AgentEvent, AgentManagerEvent } from '@/types';
+import {
+  IAgent,
+  AgentType,
+  AgentStatus,
+  Task,
+  TaskResult as _TaskResult,
+  AgentEvent,
+  AgentManagerEvent,
+} from '@/types';
 import { logger } from '@/utils/logger';
 import { generateId as _generateId } from '@/utils/helpers';
 import { config } from '@/config';
@@ -17,10 +25,10 @@ export class AgentManager extends EventEmitter {
 
   async initialize(): Promise<void> {
     logger.info('🔧 Initializing Agent Manager...');
-    
+
     // Initialize any default agents here
     // For now, we'll start with an empty agent pool
-    
+
     logger.info('✅ Agent Manager initialized');
   }
 
@@ -31,7 +39,7 @@ export class AgentManager extends EventEmitter {
     }
 
     this.isRunning = true;
-    
+
     // Start task processing loop
     this.processInterval = setInterval(() => {
       this.processTasks().catch(error => {
@@ -56,14 +64,16 @@ export class AgentManager extends EventEmitter {
     }
 
     // Stop all agents
-    const stopPromises = Array.from(this.agents.values()).map(agent => 
-      agent.stop().catch(error => 
-        logger.error(`❌ Error stopping agent ${agent.id}:`, error)
-      )
+    const stopPromises = Array.from(this.agents.values()).map(agent =>
+      agent
+        .stop()
+        .catch(error =>
+          logger.error(`❌ Error stopping agent ${agent.id}:`, error)
+        )
     );
 
     await Promise.all(stopPromises);
-    
+
     logger.info('🛑 Agent Manager stopped');
   }
 
@@ -82,12 +92,12 @@ export class AgentManager extends EventEmitter {
     try {
       await agent.initialize();
       this.agents.set(agent.id, agent);
-      
+
       this.emit(AgentManagerEvent.AGENT_CREATED, {
         type: AgentManagerEvent.AGENT_CREATED,
         agentId: agent.id,
         timestamp: new Date(),
-        data: { agent: agent.name, type: agent.type }
+        data: { agent: agent.name, type: agent.type },
       } as AgentEvent);
 
       logger.info(`✅ Agent registered: ${agent.name} (${agent.id})`);
@@ -109,7 +119,7 @@ export class AgentManager extends EventEmitter {
     try {
       await agent.stop();
       this.agents.delete(agentId);
-      
+
       logger.info(`✅ Agent unregistered: ${agent.name} (${agentId})`);
     } catch (error) {
       logger.error(`❌ Failed to unregister agent ${agentId}:`, error);
@@ -126,7 +136,9 @@ export class AgentManager extends EventEmitter {
     }
 
     // Insert task in priority order (higher priority = lower number)
-    const insertIndex = this.taskQueue.findIndex(t => t.priority > task.priority);
+    const insertIndex = this.taskQueue.findIndex(
+      t => t.priority > task.priority
+    );
     if (insertIndex === -1) {
       this.taskQueue.push(task);
     } else {
@@ -171,7 +183,7 @@ export class AgentManager extends EventEmitter {
     return {
       size: this.taskQueue.length,
       maxSize: config.config.taskQueue.maxSize,
-      tasks: [...this.taskQueue]
+      tasks: [...this.taskQueue],
     };
   }
 
@@ -190,12 +202,12 @@ export class AgentManager extends EventEmitter {
 
     // Process as many tasks as we have available agents
     const tasksToProcess = this.taskQueue.splice(0, availableAgents.length);
-    
+
     for (let i = 0; i < tasksToProcess.length; i++) {
       const task = tasksToProcess[i];
-      
+
       if (!task) continue; // Skip if task is undefined
-      
+
       // Find best agent for this task
       const bestAgent = this.findBestAgentForTask(task, availableAgents);
       if (bestAgent) {
@@ -210,10 +222,13 @@ export class AgentManager extends EventEmitter {
   /**
    * Find the best agent for a given task
    */
-  private findBestAgentForTask(task: Task, availableAgents: IAgent[]): IAgent | null {
+  private findBestAgentForTask(
+    task: Task,
+    availableAgents: IAgent[]
+  ): IAgent | null {
     // Filter agents that have required capabilities
     const capableAgents = availableAgents.filter(agent => {
-      return task.requiredCapabilities.every(capability => 
+      return task.requiredCapabilities.every(capability =>
         agent.config.capabilities.includes(capability)
       );
     });
@@ -236,16 +251,18 @@ export class AgentManager extends EventEmitter {
         type: AgentManagerEvent.TASK_ASSIGNED,
         agentId: agent.id,
         timestamp: new Date(),
-        data: { taskId: task.id, taskType: task.type }
+        data: { taskId: task.id, taskType: task.type },
       } as AgentEvent);
 
       logger.info(`🎯 Assigning task ${task.id} to agent ${agent.name}`);
-      
+
       // Execute task (this will be async, we don't wait for completion here)
       this.executeTaskOnAgent(task, agent);
-      
     } catch (error) {
-      logger.error(`❌ Failed to assign task ${task.id} to agent ${agent.id}:`, error);
+      logger.error(
+        `❌ Failed to assign task ${task.id} to agent ${agent.id}:`,
+        error
+      );
     }
   }
 
@@ -254,28 +271,33 @@ export class AgentManager extends EventEmitter {
    */
   private async executeTaskOnAgent(task: Task, agent: IAgent): Promise<void> {
     const startTime = Date.now();
-    
+
     try {
       const result = await agent.execute(task);
       const duration = Date.now() - startTime;
-      
+
       this.emit(AgentManagerEvent.TASK_COMPLETED, {
         type: AgentManagerEvent.TASK_COMPLETED,
         agentId: agent.id,
         timestamp: new Date(),
-        data: { taskId: task.id, result, duration }
+        data: { taskId: task.id, result, duration },
       } as AgentEvent);
 
-      logger.info(`✅ Task ${task.id} completed by ${agent.name} in ${duration}ms`);
-      
+      logger.info(
+        `✅ Task ${task.id} completed by ${agent.name} in ${duration}ms`
+      );
     } catch (error) {
       const duration = Date.now() - startTime;
-      
+
       this.emit(AgentManagerEvent.TASK_FAILED, {
         type: AgentManagerEvent.TASK_FAILED,
         agentId: agent.id,
         timestamp: new Date(),
-        data: { taskId: task.id, error: error instanceof Error ? error.message : String(error), duration }
+        data: {
+          taskId: task.id,
+          error: error instanceof Error ? error.message : String(error),
+          duration,
+        },
       } as AgentEvent);
 
       logger.error(`❌ Task ${task.id} failed on ${agent.name}:`, error);

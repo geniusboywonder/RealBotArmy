@@ -32,9 +32,7 @@
       "@/config/*": ["backend/config/*"]
     }
   },
-  "include": [
-    "backend/**/*"
-  ],
+  "include": ["backend/**/*"],
   "exclude": [
     "node_modules",
     "dist",

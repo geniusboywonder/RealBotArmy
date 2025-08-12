@@ -1,5 +1,10 @@
 // Agent Types
-export type AgentType = 'analyst' | 'architect' | 'developer' | 'tester' | 'deployer';
+export type AgentType =
+  | 'analyst'
+  | 'architect'
+  | 'developer'
+  | 'tester'
+  | 'deployer';
 export type AgentStatus = 'idle' | 'thinking' | 'waiting' | 'error';
 export type MessageType = 'handoff' | 'conflict' | 'agreement' | 'escalation';
 
@@ -78,7 +83,12 @@ export interface JSONPatchOperation {
 
 // WebSocket Message Types
 export interface WebSocketMessage {
-  type: 'agent_message' | 'status_update' | 'action_required' | 'spec_update' | 'system_notification';
+  type:
+    | 'agent_message'
+    | 'status_update'
+    | 'action_required'
+    | 'spec_update'
+    | 'system_notification';
   timestamp: string;
   project_id: string;
   data: WebSocketMessageData;

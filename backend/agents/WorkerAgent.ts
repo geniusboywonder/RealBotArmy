@@ -30,8 +30,10 @@ export class WorkerAgent extends BaseAgent {
   }
 
   protected async onExecute(task: Task): Promise<unknown> {
-    logger.info(`⚙️ WorkerAgent ${this.name} executing task ${task.id} of type: ${task.type}`);
-    
+    logger.info(
+      `⚙️ WorkerAgent ${this.name} executing task ${task.id} of type: ${task.type}`
+    );
+
     // Simulate different types of work based on task type
     switch (task.type) {
       case 'process':
@@ -45,10 +47,12 @@ export class WorkerAgent extends BaseAgent {
     }
   }
 
-  private async processTask(task: Task): Promise<{ processed: boolean; data: unknown }> {
+  private async processTask(
+    task: Task
+  ): Promise<{ processed: boolean; data: unknown }> {
     // Simulate processing work
     await sleep(1000 + Math.random() * 2000); // 1-3 seconds
-    
+
     return {
       processed: true,
       data: task.payload,
@@ -58,9 +62,9 @@ export class WorkerAgent extends BaseAgent {
   private async calculateTask(task: Task): Promise<{ result: number }> {
     // Simulate calculation work
     await sleep(500 + Math.random() * 1000); // 0.5-1.5 seconds
-    
+
     const { a = 1, b = 1 } = task.payload as { a?: number; b?: number };
-    
+
     return {
       result: a + b,
     };
@@ -69,9 +73,9 @@ export class WorkerAgent extends BaseAgent {
   private async transformTask(task: Task): Promise<{ transformed: unknown }> {
     // Simulate transformation work
     await sleep(800 + Math.random() * 1200); // 0.8-2 seconds
-    
+
     const data = task.payload;
-    
+
     return {
       transformed: {
         original: data,
@@ -84,9 +88,11 @@ export class WorkerAgent extends BaseAgent {
   private async defaultTask(task: Task): Promise<{ completed: boolean }> {
     // Default task handling
     await sleep(500 + Math.random() * 500); // 0.5-1 seconds
-    
-    logger.info(`🔄 WorkerAgent ${this.name} completed default task ${task.id}`);
-    
+
+    logger.info(
+      `🔄 WorkerAgent ${this.name} completed default task ${task.id}`
+    );
+
     return {
       completed: true,
     };

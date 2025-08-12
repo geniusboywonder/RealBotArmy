@@ -16,7 +16,7 @@ const TabNavigation: React.FC<TabNavigationProps> = ({
   return (
     <div className="bg-white border-b border-gray-200">
       <nav className="flex space-x-8 px-6">
-        {agents.map((agent) => (
+        {agents.map(agent => (
           <button
             key={agent.id}
             onClick={() => onTabChange(agent.id)}

@@ -13,15 +13,11 @@ const AgentConsole: React.FC<AgentConsoleProps> = ({ agentId }) => {
           {agentId} Console
         </h2>
         <div className="flex space-x-2">
-          <button className="btn-secondary text-sm">
-            Clear History
-          </button>
-          <button className="btn-primary text-sm">
-            Send Message
-          </button>
+          <button className="btn-secondary text-sm">Clear History</button>
+          <button className="btn-primary text-sm">Send Message</button>
         </div>
       </div>
-      
+
       <div className="flex-1 card">
         <ConversationView agentId={agentId} />
       </div>

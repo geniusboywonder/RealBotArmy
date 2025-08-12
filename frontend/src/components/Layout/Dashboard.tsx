@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
     <div className="h-screen bg-gray-50 flex flex-col">
       {/* Header */}
       <Header />
-      
+
       {/* Main Content */}
       <div className="flex-1 flex overflow-hidden">
         {/* Agent Consoles Area */}
@@ -60,15 +60,15 @@ const Dashboard: React.FC = () => {
             activeTab={activeTab}
             onTabChange={setActiveTab}
           />
-          
+
           {/* Active Agent Console */}
           <div className="flex-1 p-6">
             <AgentConsole agentId={activeTab} />
           </div>
         </div>
-        
+
         {/* Action Queue Sidebar */}
-        <ActionQueue 
+        <ActionQueue
           isOpen={isActionQueueOpen}
           onToggle={() => setIsActionQueueOpen(!isActionQueueOpen)}
         />
