@@ -76,7 +76,7 @@ manager.submitTask({
 
 ```
 RealBotArmy/
-├── src/
+├── backend/
 │   ├── agents/         # Agent implementations
 │   ├── core/          # Core functionality
 │   ├── utils/         # Utility functions

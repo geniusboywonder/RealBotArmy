@@ -10,10 +10,10 @@ module.exports = {
     '^.+\\.ts$': 'ts-jest',
   },
   collectCoverageFrom: [
-    'src/**/*.ts',
-    '!src/**/*.d.ts',
-    '!src/**/*.test.ts',
-    '!src/**/*.spec.ts',
+    'backend/**/*.ts',
+    '!backend/**/*.d.ts',
+    '!backend/**/*.test.ts',
+    '!backend/**/*.spec.ts',
   ],
   coverageDirectory: 'coverage',
   coverageReporters: [
@@ -22,12 +22,12 @@ module.exports = {
     'html'
   ],
   moduleNameMapping: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-    '^@/agents/(.*)$': '<rootDir>/src/agents/$1',
-    '^@/core/(.*)$': '<rootDir>/src/core/$1',
-    '^@/utils/(.*)$': '<rootDir>/src/utils/$1',
-    '^@/types/(.*)$': '<rootDir>/src/types/$1',
-    '^@/config/(.*)$': '<rootDir>/src/config/$1',
+    '^@/(.*)$': '<rootDir>/backend/$1',
+    '^@/agents/(.*)$': '<rootDir>/backend/agents/$1',
+    '^@/core/(.*)$': '<rootDir>/backend/core/$1',
+    '^@/utils/(.*)$': '<rootDir>/backend/utils/$1',
+    '^@/types/(.*)$': '<rootDir>/backend/types/$1',
+    '^@/config/(.*)$': '<rootDir>/backend/config/$1',
   },
   setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
   testTimeout: 10000,

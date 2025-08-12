@@ -1,9 +1,9 @@
-import { AgentManager } from '../src/core/AgentManager';
-import { WorkerAgent } from '../src/agents';
-import { TaskSchema } from '../src/types';
-import { generateId } from '../src/utils/helpers';
-import { config } from '../src/config';
-import { logger } from '../src/utils/logger';
+import { AgentManager } from '../backend/core/AgentManager';
+import { WorkerAgent } from '../backend/agents';
+import { TaskSchema } from '../backend/types';
+import { generateId } from '../backend/utils/helpers';
+import { config } from '../backend/config';
+import { logger } from '../backend/utils/logger';
 
 async function basicExample() {
   try {

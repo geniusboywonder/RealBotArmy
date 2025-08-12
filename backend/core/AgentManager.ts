@@ -194,6 +194,8 @@ export class AgentManager extends EventEmitter {
     for (let i = 0; i < tasksToProcess.length; i++) {
       const task = tasksToProcess[i];
       
+      if (!task) continue; // Skip if task is undefined
+      
       // Find best agent for this task
       const bestAgent = this.findBestAgentForTask(task, availableAgents);
       if (bestAgent) {
@@ -222,7 +224,7 @@ export class AgentManager extends EventEmitter {
 
     // For now, just return the first capable agent
     // In the future, we could implement more sophisticated selection logic
-    return capableAgents[0];
+    return capableAgents[0] || null;
   }
 
   /**

@@ -22,12 +22,12 @@ Your RealBotArmy project has been fully set up with all the features you request
 - **.gitignore** - Comprehensive ignore rules
 
 ### ✅ Source Code Architecture
-- **src/index.ts** - Main application entry
-- **src/types/** - TypeScript type definitions
-- **src/config/** - Configuration management
-- **src/core/AgentManager.ts** - Agent orchestration
-- **src/agents/** - Agent implementations (BaseAgent, WorkerAgent)
-- **src/utils/** - Helper functions and logging
+- **backend/index.ts** - Main application entry
+- **backend/types/** - TypeScript type definitions
+- **backend/config/** - Configuration management
+- **backend/core/AgentManager.ts** - Agent orchestration
+- **backend/agents/** - Agent implementations (BaseAgent, WorkerAgent)
+- **backend/utils/** - Helper functions and logging
 
 ### ✅ Testing Setup
 - **tests/setup.ts** - Test configuration
@@ -97,7 +97,7 @@ RealBotArmy/
 ├── ⚙️ .prettierrc
 ├── ⚙️ .env.example
 ├── 🚫 .gitignore
-├── 📂 src/
+├── 📂 backend/
 │   ├── 🎯 index.ts
 │   ├── 📂 agents/
 │   │   ├── BaseAgent.ts
@@ -139,7 +139,7 @@ RealBotArmy/
 ## 🔧 Key Features Implemented
 
 - ✅ **A) Package.json** with all dependencies
-- ✅ **B) Initial agent architecture** in src/
+- ✅ **B) Initial agent architecture** in backend/
 - ✅ **C) CI/CD workflow** with GitHub Actions  
 - ✅ **D) Development environment** (ESLint, Prettier, TypeScript)
 - ✅ **Branch protection** ready workflows

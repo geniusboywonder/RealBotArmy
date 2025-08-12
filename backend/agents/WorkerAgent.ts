@@ -52,7 +52,6 @@ export class WorkerAgent extends BaseAgent {
     return {
       processed: true,
       data: task.payload,
-      timestamp: new Date().toISOString(),
     };
   }
 

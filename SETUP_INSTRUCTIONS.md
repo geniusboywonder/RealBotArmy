@@ -9,7 +9,7 @@ I've reorganized the project structure to avoid GitHub conflicts:
 📁 AI Code/                          # Your main working directory (points to BotArmy repo)
 ├── 📁 Projects/                     # New subfolder for separate projects
 │   └── 📁 RealBotArmy/             # Our new project (will point to RealBotArmy repo)
-│       ├── src/, tests/, docs/, etc.
+│       ├── backend/, tests/, docs/, etc.
 │       └── scripts/init-git.sh      # Updated git initialization
 ├── 📁 Bot Army/                     # For the existing BotArmy content  
 ├── Other BotArmy files...           # Your existing BotArmy project files
