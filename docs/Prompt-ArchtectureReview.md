@@ -1,0 +1,3 @@
+think hard and research widely.
+
+assume the role in the attached md. Review this archtecture document and critically analyse it for gaps or bad design. the architecture needs to run on free, open-source and cloud-based solutions. it needs to be lightweight with low complexity. Summarise your feedback into a md document for download making suggestions to improve areas, technology and tools that you dont agree on.
