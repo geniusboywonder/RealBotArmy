@@ -1,9 +1,11 @@
 # BotArmy Architecture Review Summary
 
 ## Executive Summary
+
 This document summarizes the critical reviews of the BotArmy Technical Architecture (`updated_architecture.md`) by multiple architect agents (Copilot, Perplexity, ChatGPT, Qwen, Deepseek, Gemini), focusing on consensus areas for improvement and agreement to align with the goals of being free, open-source, cloud-based, lightweight, and low-complexity. The reviews highlight over-engineering, reliance on costly/proprietary tools, and unsuitable deployment choices for a POC. Key areas needing rework include deployment platform, LLM orchestration, message bus, state management, and document handling. Consensus exists on retaining a small agent set, JSONL logging, and real-time updates, but simpler, open-source alternatives are recommended to reduce complexity and costs.
 
 ## Methodology
+
 The summary aggregates findings from five architect reviews, identifying majority consensus (≥3/5 reviews agree on an issue or recommendation) on gaps, improvements, and strengths. Each review was evaluated against the Architect role’s responsibilities (technical feasibility, cost efficiency, simplicity) and the requirement to optimize agent-use costs, prevent looping, and ensure concise prompts. Suggested tools/approaches may differ, but consensus on problem areas is prioritized. The output is a concise plan for revising `updated_architecture.md`.
 
 ## Consensus Areas: Issues and Recommendations
@@ -76,6 +78,7 @@ The following areas need immediate attention to align with the lightweight, free
 ## Implementation Plan
 
 ### Phase 1 (Week 1-2): Core Simplification
+
 - **Tasks**:
   - Deploy on Railway.app/Replit (Section 2.1/10.1).
   - Replace LangChain/ReWOO with custom FSM and Ollama (Section 8).
@@ -85,6 +88,7 @@ The following areas need immediate attention to align with the lightweight, free
 - **Metrics**: Deployable prototype with <100ms UI latency, <30% token usage vs. current.
 
 ### Phase 2 (Week 3-4): Optimization and Testing
+
 - **Tasks**:
   - Integrate Unstructured.io for doc extraction (Section 3.1/5.2).
   - Implement SSE/long-polling (Section 3.2).
@@ -93,6 +97,7 @@ The following areas need immediate attention to align with the lightweight, free
 - **Metrics**: <5% loop escalations, <50% token waste, 80% test coverage.
 
 ### Phase 3 (Week 5-6): Refinement
+
 - **Tasks**:
   - Add OpenTelemetry for observability (new Section 11.3).
   - Benchmark token usage with SQLite extracts vs. LangExtract.
@@ -100,16 +105,20 @@ The following areas need immediate attention to align with the lightweight, free
 - **Metrics**: 95% uptime, <1s real-time updates, nightly log rotation.
 
 ## Risks and Mitigations
+
 - **Risk**: Free-tier limits (e.g., Railway 500h/month). **Mitigation**: Monitor usage, fallback to Replit.
 - **Risk**: Local LLM performance on low-spec hosts. **Mitigation**: Use quantized models (e.g., Q4_K_M).
 - **Risk**: SSE/polling latency. **Mitigation**: Optimize payloads, test on Vercel.
 - **Risk**: Simplified conflict resolution misses edge cases. **Mitigation**: Log failures, add semantic checks in Phase 3.
 
 ## Save Instructions
+
 Copy this content into `architecture_review_summary.md` in your project’s `docs/` folder (e.g., `botarmy/docs/`). For GitHub Codespaces, save to `/workspaces/botarmy/docs/architecture_review_summary.md` and commit via:
+
 ```bash
 git add docs/architecture_review_summary.md
 git commit -m "Add architecture review summary based on consensus"
 git push
 ```
+
 Alternatively, download as a `.md` file from your editor or upload to cloud storage (e.g., Google Drive). Confirm if you need specific save instructions.

@@ -1,7 +1,6 @@
 
 Critical Analysis of Cloud Architecture for Free, Open-Source, Lightweight, and Low-Complexity Deployment
 
-
 1. Executive Summary
 
 This report provides a critical analysis of an existing cloud architecture, evaluating its adherence to the core principles of being free, open-source, cloud-based, lightweight, and low-complexity. While the current architecture (as inferred from the user query) likely leverages some cloud services, a deeper examination reveals potential deviations from the long-term "free" and "low complexity" objectives, particularly concerning reliance on time-limited free tiers and the operational overhead of certain component choices.
@@ -124,7 +123,6 @@ Plan for seamless upgrade paths or alternative solutions
 Ensures future growth without major disruption
 6
 
-
 6. Consolidated Recommendations for Improvement
 
 This section synthesizes the analysis into actionable advice, providing concrete alternatives and architectural refinements.
@@ -184,7 +182,6 @@ Low / Low
 Secure direct calls / Lightweight pub/sub for IoT
 4
 
-
 6.2. Architectural Refinements
 
 Prioritize Managed Free Tiers Strategically: Where available and suitable for the workload, leveraging managed open-source free tiers (e.g., Aiven PostgreSQL 6, HiveMQ Cloud 4) can significantly reduce operational complexity and achieve cost savings. It is important to understand their inherent limitations and plan accordingly.
@@ -205,19 +202,19 @@ Documentation: Clear and comprehensive documentation for any self-managed compon
 Achieving an architecture that is simultaneously "free, open-source, cloud-based, lightweight, and low complexity" requires careful trade-offs and a nuanced understanding of what "free" truly entails in a cloud context. The analysis demonstrates that "free" often implies significant limitations or time-based offers from major cloud providers, pushing true "free forever" solutions towards self-managed open-source components. However, this shift then introduces a different form of cost: increased operational complexity and the need for dedicated system administration expertise.
 The path forward involves a strategic, phased approach. It is recommended to prioritize managed open-source free tiers where they align with workload requirements and offer genuine long-term "free" usage, thereby minimizing operational burden. For components where true "free forever" is paramount, self-hosting open-source solutions on minimal infrastructure should be considered, with a clear understanding of the increased complexity this entails. All communication, especially from edge devices, must be secured. Continuous monitoring of resource usage and proactive planning for scalability are essential to ensure the architecture remains sustainable and cost-effective as it evolves. By carefully navigating these trade-offs, a robust, free, open-source, lightweight, and low-complexity cloud architecture can be realized.
 Works cited
-Spanner: Always-on, virtually unlimited scale database - Google Cloud, accessed on August 15, 2025, https://cloud.google.com/spanner
-Use an Azure free account to try Azure Database for PostgreSQL flexible server for free, accessed on August 15, 2025, https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-deploy-on-azure-free-account
-Amazon RDS for MariaDB pricing - AWS, accessed on August 15, 2025, https://aws.amazon.com/rds/mariadb/pricing/
-HiveMQ Cloud – Fully-Managed MQTT Platform on the Cloud | Free Version Available, accessed on August 15, 2025, https://www.hivemq.com/products/mqtt-cloud-broker/
-MariaDB Community Server: Free, Open Source Database, accessed on August 15, 2025, https://mariadb.com/products/community-server/
-Create hosted PostgreSQL® database for FREE - Aiven, accessed on August 15, 2025, https://aiven.io/free-postgresql-database
-Explore Free Azure Services, accessed on August 15, 2025, https://azure.microsoft.com/en-us/pricing/free-services
-Apache OpenWhisk is a serverless, open source cloud platform, accessed on August 15, 2025, https://openwhisk.apache.org/
-Apache CloudStack - The Apache Software Foundation, accessed on August 15, 2025, https://cloudstack.apache.org/
-ESP32 HTTPS Requests (Arduino IDE) - Random Nerd Tutorials, accessed on August 15, 2025, https://randomnerdtutorials.com/esp32-https-requests/
-The Free Public MQTT Broker & MQTT Client by HiveMQ - Check out our MQTT Demo, accessed on August 15, 2025, https://www.hivemq.com/mqtt/public-mqtt-broker/
-NATS.io – Cloud Native, Open Source, High-performance Messaging, accessed on August 15, 2025, https://nats.io/
-RabbitMQ: One broker to queue them all | RabbitMQ, accessed on August 15, 2025, https://www.rabbitmq.com/
-Elestio: Fully Managed Open source, accessed on August 15, 2025, https://elest.io/
-Optimize Python applications for Cloud Run, accessed on August 15, 2025, https://cloud.google.com/run/docs/tips/python
-ESP32 HTTP GET and HTTP POST with Arduino IDE - Random Nerd Tutorials, accessed on August 15, 2025, https://randomnerdtutorials.com/esp32-http-get-post-arduino/
+Spanner: Always-on, virtually unlimited scale database - Google Cloud, accessed on August 15, 2025, <https://cloud.google.com/spanner>
+Use an Azure free account to try Azure Database for PostgreSQL flexible server for free, accessed on August 15, 2025, <https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-deploy-on-azure-free-account>
+Amazon RDS for MariaDB pricing - AWS, accessed on August 15, 2025, <https://aws.amazon.com/rds/mariadb/pricing/>
+HiveMQ Cloud – Fully-Managed MQTT Platform on the Cloud | Free Version Available, accessed on August 15, 2025, <https://www.hivemq.com/products/mqtt-cloud-broker/>
+MariaDB Community Server: Free, Open Source Database, accessed on August 15, 2025, <https://mariadb.com/products/community-server/>
+Create hosted PostgreSQL® database for FREE - Aiven, accessed on August 15, 2025, <https://aiven.io/free-postgresql-database>
+Explore Free Azure Services, accessed on August 15, 2025, <https://azure.microsoft.com/en-us/pricing/free-services>
+Apache OpenWhisk is a serverless, open source cloud platform, accessed on August 15, 2025, <https://openwhisk.apache.org/>
+Apache CloudStack - The Apache Software Foundation, accessed on August 15, 2025, <https://cloudstack.apache.org/>
+ESP32 HTTPS Requests (Arduino IDE) - Random Nerd Tutorials, accessed on August 15, 2025, <https://randomnerdtutorials.com/esp32-https-requests/>
+The Free Public MQTT Broker & MQTT Client by HiveMQ - Check out our MQTT Demo, accessed on August 15, 2025, <https://www.hivemq.com/mqtt/public-mqtt-broker/>
+NATS.io – Cloud Native, Open Source, High-performance Messaging, accessed on August 15, 2025, <https://nats.io/>
+RabbitMQ: One broker to queue them all | RabbitMQ, accessed on August 15, 2025, <https://www.rabbitmq.com/>
+Elestio: Fully Managed Open source, accessed on August 15, 2025, <https://elest.io/>
+Optimize Python applications for Cloud Run, accessed on August 15, 2025, <https://cloud.google.com/run/docs/tips/python>
+ESP32 HTTP GET and HTTP POST with Arduino IDE - Random Nerd Tutorials, accessed on August 15, 2025, <https://randomnerdtutorials.com/esp32-http-get-post-arduino/>

@@ -1,4 +1,5 @@
 # GROK Architecture — Critical Review & Lightweight, Free/Open-Source Cloud Refactor
+
 **Role assumed:** Principal Solutions Architect (per `architect_role.md`).  
 **Date:** 15 Aug 2025
 
@@ -54,6 +55,7 @@
 ## Lean Reference Stack (Two Options)
 
 ### Option A — “All‑Cloudflare” (simplest deploy)
+
 - **Frontend:** Cloudflare **Pages** (static React/Vite).  
 - **Backend:** Cloudflare **Workers** (HTTP + WebSocket streaming).  
 - **Storage:** **D1** (SQLite) for runs/queues/config; **R2** optional for artifacts.  
@@ -63,6 +65,7 @@
 - **Cons:** not pure OSS hosting (Cloudflare is proprietary), but stack uses OSS runtimes (SQLite/llama.cpp).
 
 ### Option B — “Supabase + Pages” (richer realtime)
+
 - **Frontend:** Cloudflare **Pages**.  
 - **Backend:** Cloudflare **Workers** (or small FastAPI on free service).  
 - **DB + Realtime:** **Supabase** (Postgres, OSS) for durable queue (LISTEN/NOTIFY or Realtime) and auth.  
@@ -183,4 +186,5 @@ flowchart LR
 ---
 
 ### Final Thought
+
 Pick **boring, proven OSS** and free serverless where possible. Your best path to reliability at $0 is **Workers/Pages + D1** (or **Supabase**) + **Ollama/vLLM**. Everything else is optional until you have users.

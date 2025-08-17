@@ -1,9 +1,11 @@
 # Architecture Review and Recommendations
 
 ## Overview
+
 After carefully reviewing the BotArmy Technical Architecture Document and the Architect Role specifications, I've identified several areas for improvement to better align with the goals of lightweight, low-complexity, and free/open-source cloud-based solutions.
 
 ## Key Strengths
+
 - Clear separation of concerns between agents
 - Good use of JSON-based persistence for simplicity
 - Effective WebSocket implementation for real-time updates
@@ -12,44 +14,54 @@ After carefully reviewing the BotArmy Technical Architecture Document and the Ar
 ## Critical Gaps and Recommendations
 
 ### 1. Over-Reliance on GitHub Codespaces (Section 2.1, 10.1)
+
 **Issue**: GitHub Codespaces free tier has significant limitations (120 core-hours/month) and may not be sufficient for sustained development.
 
 **Recommendations**:
+
 - Add **GitPod** as a primary alternative (50h free/month, more generous resources)
 - Include **Vercel** + **Supabase** free tier for production-ready hosting
 - Consider **Railway.app**'s free tier for backend services
 - Document migration path between these options
 
 ### 2. Complex State Management (Section 4.1)
+
 **Issue**: Combining Zustand, React State, and IndexedDB adds unnecessary complexity.
 
 **Recommendations**:
+
 - Replace with **Jotai** for atomic state management (simpler than Zustand)
 - Use **Dexie.js** as a unified IndexedDB interface
 - Implement a single state synchronization layer instead of multiple stores
 
 ### 3. Inefficient Document Handling (Section 3.1, 5.2)
+
 **Issue**: Current LangExtract implementation doesn't leverage modern LLM document processing.
 
 **Recommendations**:
+
 - Replace LangExtract with **LlamaParse** (free tier available)
 - Add **Unstructured.io** for document chunking
 - Implement **RAG** pattern with local vector storage (ChromaDB)
 - Store embeddings in **SQLite** instead of raw JSON
 
 ### 4. Message Bus Limitations (Section 3.1)
+
 **Issue**: In-memory queue won't scale beyond POC and lacks durability.
 
 **Recommendations**:
+
 - Replace with **NATS** (free tier, cloud-native, lightweight)
 - Alternative: **Redis Streams** (free up to 30MB)
 - Implement persistent queue with **SQLite** as fallback
 - Add message compaction to reduce storage needs
 
 ### 5. Over-Engineered Conflict Resolution (Section 3.3)
+
 **Issue**: Current implementation is too complex for lightweight needs.
 
 **Recommendations**:
+
 - Simplify to 3 core conflict types:
   1. Resource contention
   2. Requirement ambiguity
@@ -58,18 +70,22 @@ After carefully reviewing the BotArmy Technical Architecture Document and the Ar
 - Implement **Exponential Backoff** for retries
 
 ### 6. Costly LLM Integration (Section 8.1)
+
 **Issue**: Reliance on paid LLMs (Claude, GPT) contradicts free-tier goals.
 
 **Recommendations**:
+
 - Add **Ollama** for local LLM execution
 - Support **Mistral 7B** as primary free model
 - Implement **LLM caching** with SQLite
 - Add **distributed computing** option for resource sharing
 
 ### 7. Frontend Complexity (Section 4.2)
+
 **Issue**: Current component structure is overly fragmented.
 
 **Recommendations**:
+
 - Consolidate to 5 core components:
   1. Agent Dashboard
   2. Message Center
@@ -80,9 +96,11 @@ After carefully reviewing the BotArmy Technical Architecture Document and the Ar
 - Implement **islands architecture** for better performance
 
 ### 8. Testing Strategy Gaps (Section 9.1)
+
 **Issue**: Missing critical testing types for distributed systems.
 
 **Recommendations**:
+
 - Add **Property-based testing** with Hypothesis
 - Implement **Chaos Engineering** tests
 - Include **LLM output validation** tests
@@ -101,7 +119,7 @@ After carefully reviewing the BotArmy Technical Architecture Document and the Ar
 
 ## Implementation Roadmap Adjustments
 
-1. **Phase 1 (Core)**: 
+1. **Phase 1 (Core)**:
    - Replace Zustand with Jotai
    - Implement NATS message bus
    - Set up Ollama integration

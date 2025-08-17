@@ -95,5 +95,5 @@ BotArmy’s architecture reflects strong engineering and foresight. However, for
 
 **Save this review as `architect_feedback_botarmy_2025.md` in your documentation. If you have special requirements for the feedback format or specific technologies, please clarify before finalizing.**
 
-[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/1433068/b696f413-e1c7-479b-bd3c-ed4b919cc234/architect_role.md
-[2] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/1433068/1515982a-478e-4dc9-98b1-69ad7375673e/Grok-UpdatedArchitecture.md
+[1] <https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/1433068/b696f413-e1c7-479b-bd3c-ed4b919cc234/architect_role.md>
+[2] <https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/1433068/1515982a-478e-4dc9-98b1-69ad7375673e/Grok-UpdatedArchitecture.md>

@@ -14,6 +14,7 @@ After reviewing the comprehensive architecture feedback from multiple architect 
 **New Decision**: **Replit** as single POC platform
 
 **Rationale**:
+
 - **Single Platform Solution**: Replit provides code editor, hosting, database, and real-time capabilities in one free platform
 - **Always-On Deployment**: Unlike Codespaces, Replit can host the live application 24/7 on free tier
 - **Integrated Database**: Built-in SQLite/PostgreSQL eliminates external dependencies
@@ -21,6 +22,7 @@ After reviewing the comprehensive architecture feedback from multiple architect 
 - **Zero Setup**: No Docker, environment configuration, or deployment pipelines needed
 
 **POC vs Production**:
+
 - **POC**: Pure Replit with integrated services
 - **Production**: Migrate to Railway.app or Vercel + PlanetScale with Docker containers
 
@@ -30,6 +32,7 @@ After reviewing the comprehensive architecture feedback from multiple architect 
 **New Decision**: **Direct API calls with simple retry logic**
 
 **Rationale**:
+
 - **Cost Control**: Start with OpenAI GPT-4o-mini (free tier) as single provider
 - **Complexity Reduction**: Remove LangChain abstractions, use direct REST API calls
 - **Token Efficiency**: Simple prompt templates instead of complex chains
@@ -54,6 +57,7 @@ class SimpleLLMClient:
 ```
 
 **POC vs Production**:
+
 - **POC**: OpenAI GPT-4o-mini only, direct API calls
 - **Production**: Add Anthropic Claude fallback, consider Ollama for cost reduction
 
@@ -63,6 +67,7 @@ class SimpleLLMClient:
 **New Decision**: **SQLite queue + Server-Sent Events (SSE)**
 
 **Rationale**:
+
 - **Durability**: SQLite provides persistence without external database
 - **Simplicity**: Single file database, no Redis or complex message brokers
 - **Free Tier Compatible**: SSE works reliably on Replit, unlike WebSocket limitations
@@ -85,6 +90,7 @@ class MessageQueue:
 ```
 
 **POC vs Production**:
+
 - **POC**: SQLite with SSE for real-time updates
 - **Production**: Upgrade to PostgreSQL + Redis for horizontal scaling
 
@@ -94,6 +100,7 @@ class MessageQueue:
 **New Decision**: **React Context + localStorage + simple state**
 
 **Rationale**:
+
 - **Bundle Size**: Reduce JavaScript bundle from ~500KB to <100KB
 - **Complexity**: Single source of truth instead of multiple stores
 - **POC Scope**: No offline functionality needed for POC
@@ -122,6 +129,7 @@ export const AppProvider = ({ children }) => {
 ```
 
 **POC vs Production**:
+
 - **POC**: React Context + localStorage
 - **Production**: Upgrade to Zustand + React Query for better performance
 
@@ -131,11 +139,13 @@ export const AppProvider = ({ children }) => {
 **New Decision**: **React + Tailwind + 5 core components**
 
 **Rationale**:
+
 - **Development Speed**: Pre-built components instead of custom implementations
 - **Maintenance**: Fewer components to maintain and debug
 - **Consistency**: Standardized UI patterns
 
 **Core Components**:
+
 1. **Dashboard** - Main layout and navigation
 2. **AgentPanel** - Combined agent status and conversation view
 3. **ActionQueue** - Human intervention requests
@@ -143,6 +153,7 @@ export const AppProvider = ({ children }) => {
 5. **StatusBar** - System health and progress
 
 **POC vs Production**:
+
 - **POC**: 5 monolithic components with inline styles
 - **Production**: Componentize further with design system
 
@@ -151,6 +162,7 @@ export const AppProvider = ({ children }) => {
 ### 1. **DEFENDED**: FastAPI Backend
 
 **Why Keeping**: FastAPI remains the optimal choice because:
+
 - **Async Support**: Native async/await for LLM API calls
 - **Automatic Documentation**: OpenAPI generation for API testing
 - **Lightweight**: Minimal overhead compared to Django or Flask
@@ -160,6 +172,7 @@ export const AppProvider = ({ children }) => {
 ### 2. **DEFENDED**: Sequential Agent Workflow
 
 **Why Keeping**: The sequential workflow (Analyst → Architect → Developer → Tester) remains optimal because:
+
 - **Predictable**: Clear handoff points and progress tracking
 - **Debuggable**: Easy to identify where failures occur
 - **Cost Efficient**: Prevents multiple agents running simultaneously
@@ -168,6 +181,7 @@ export const AppProvider = ({ children }) => {
 ### 3. **DEFENDED**: Real-time Updates (with modification)
 
 **Why Keeping**: Real-time visibility is essential for human oversight, but switching from WebSockets to SSE:
+
 - **Human Engagement**: Users need to see agent progress to maintain trust
 - **Intervention Points**: Real-time notifications for human decisions
 - **Debugging**: Live view of agent conversations helps troubleshooting
@@ -225,6 +239,7 @@ botarmy/
 ### Core Implementation Strategy
 
 #### 1. Single-File Backend Architecture
+
 ```python
 # main.py - Complete backend in one file for POC
 from fastapi import FastAPI, Request
@@ -267,6 +282,7 @@ async def stream_updates():
 ```
 
 #### 2. Single-Page React Application
+
 ```javascript
 // App.jsx - Complete frontend in minimal components
 import React, { useState, useEffect, createContext, useContext } from 'react';
@@ -311,16 +327,19 @@ export default function App() {
 ## Implementation Timeline
 
 ### Week 1: Foundation
+
 - **Day 1-2**: Set up Replit project, basic FastAPI with SQLite
 - **Day 3-4**: Implement single Analyst agent with OpenAI integration
 - **Day 5-7**: Basic React UI with SSE connection, manual testing
 
 ### Week 2: Agent Pipeline
+
 - **Day 8-9**: Add Architect and Developer agents with sequential workflow
 - **Day 10-11**: Implement conflict detection and human escalation
 - **Day 12-14**: UI refinement and end-to-end testing
 
 ### Week 3: Polish and Deploy
+
 - **Day 15-16**: Add Tester agent and basic artifact generation
 - **Day 17-18**: Performance optimization and error handling
 - **Day 19-21**: Documentation, demo preparation, and stakeholder review
@@ -338,12 +357,14 @@ export default function App() {
 ## Success Metrics (Revised for POC)
 
 ### Technical Metrics
+
 - **Deployment Time**: < 5 minutes from code to live URL
 - **Response Latency**: < 3 seconds for agent responses
 - **Uptime**: > 90% during testing period (Replit limitations acceptable)
 - **Memory Usage**: < 512MB (Replit free tier limit)
 
 ### Functional Metrics
+
 - **Agent Success Rate**: > 80% successful handoffs without human intervention
 - **Token Efficiency**: < 2000 tokens per complete workflow
 - **Human Escalation**: < 30% of workflows require human input
@@ -354,6 +375,7 @@ export default function App() {
 This simplified architecture prioritizes **delivery speed over architectural purity**. While the original design was technically superior for production use, it was inappropriate for POC requirements.
 
 **Key Benefits of Simplified Approach**:
+
 1. **Single Platform**: Everything runs on Replit with zero external dependencies
 2. **Minimal Complexity**: Can be understood and modified by any developer
 3. **Cost Control**: Stays within free tiers of all services

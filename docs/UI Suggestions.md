@@ -29,12 +29,3 @@ Logs page now has a terminal-like appearance with hover effects
 Settings page redesigned with better organization and visual feedback
 Artifacts page improved with better file tree navigation
 The interface now feels much more modern and professional, with smooth animations, better visual feedback, and an overall more polished user experience that matches current design trends!
-
-
-
-
-
-
-
-
-
